@@ -2,6 +2,26 @@
 
 My solution to _Programming Language Foundations in Agda_ (available at [https://plfa.github.io](https://plfa.github.io/))
 
+## Getting Started
+
+The `template` branch contains a bare solution scaffold. You could fork this repo and use it to write your own solutions to PLFA.
+
+### Setup
+
+[WIP]
+
+#### Install Haskell
+
+[WIP]
+
+#### Install Agda
+
+[WIP]
+
+#### Tunning your editor
+
+- VSCode [WIP]
+
 ## TODOs
 
 ### Part 1: Logical Foundations
