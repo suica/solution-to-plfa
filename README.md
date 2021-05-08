@@ -1,5 +1,6 @@
 # solution-to-plfa
-My solution to *Programming Language Foundations in Agda* (available at [plfa.github.io](plfa.github.io))
+
+My solution to _Programming Language Foundations in Agda_ (available at [plfa.github.io](plfa.github.io))
 
 ## TODOs
 
@@ -15,7 +16,6 @@ My solution to *Programming Language Foundations in Agda* (available at [plfa.gi
 - [ ] Quantifiers: Universals and existentials
 - [ ] Decidable: Booleans and decision procedures
 - [ ] Lists: Lists and higher-order functions
-
 
 ### Part II
 
@@ -84,7 +84,7 @@ n ^ zero = 1
 n ^ suc m = n * (n ^ m)
 
 _ : 3 ^ 4 ≡ 81
-_ = 
+_ =
     begin
       3 ^ 4
     ≡⟨⟩
@@ -156,7 +156,7 @@ to : ℕ → Bin
 to zero = ⟨⟩ O
 to (suc x) = inc (to x)
 
-_ : to 11 ≡ (⟨⟩ I O I I) 
+_ : to 11 ≡ (⟨⟩ I O I I)
 _ = refl
 
 from : Bin → ℕ
