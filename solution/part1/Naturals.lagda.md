@@ -1,45 +1,4 @@
-# solution-to-plfa
-
-My solution to _Programming Language Foundations in Agda_ (available at [plfa.github.io](plfa.github.io))
-
-## TODOs
-
-### Part I
-
-- [x] Naturals: Natural numbers
-- [ ] Induction: Proof by Induction
-- [ ] Relations: Inductive definition of relations
-- [ ] Equality: Equality and equational reasoning
-- [ ] Isomorphism: Isomorphism and Embedding
-- [ ] Connectives: Conjunction, disjunction, and implication
-- [ ] Negation: Negation, with intuitionistic and classical logic
-- [ ] Quantifiers: Universals and existentials
-- [ ] Decidable: Booleans and decision procedures
-- [ ] Lists: Lists and higher-order functions
-
-### Part II
-
-- [ ] Lambda: Introduction to Lambda Calculus
-- [ ] Properties: Progress and Preservation
-- [ ] DeBruijn: Intrinsically-typed de Bruijn representation
-- [ ] More: Additional constructs of simply-typed lambda calculus
-- [ ] Bisimulation: Relating reduction systems
-- [ ] Inference: Bidirectional type inference
-- [ ] Untyped: Untyped lambda calculus with full normalisation
-- [ ] Confluence: Confluence of untyped lambda calculus
-- [ ] BigStep: Big-step semantics of untyped lambda calculus
-
-### Part III
-
-- [ ] Denotational: Denotational semantics of untyped lambda calculus
-- [ ] Compositional: The denotational semantics is compositional
-- [ ] Soundness: Soundness of reduction with respect to denotational semantics
-- [ ] Adequacy: Adequacy of denotational semantics with respect to operational semantics
-- [ ] ContextualEquivalence: Denotational equality implies contextual equivalence
-
-## Part I
-
-### Naturals
+# Naturals
 
 ```agda
 data ℕ : Set where
