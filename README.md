@@ -6,7 +6,7 @@ My solution to _Programming Language Foundations in Agda_ (available at [https:/
 
 ### Part 1: Logical Foundations
 
-- [x] [Naturals](https://plfa.github.io/Naturals/)([solution](./src/part_1/naturals.lagda.md)): Natural numbers
+- [ ] [Naturals](https://plfa.github.io/Naturals/): Natural numbers
 - [ ] [Induction](https://plfa.github.io/Induction/): Proof by Induction
 - [ ] [Relations](https://plfa.github.io/Relations/): Inductive definition of relations
 - [ ] [Equality](https://plfa.github.io/Equality/): Equality and equational reasoning
