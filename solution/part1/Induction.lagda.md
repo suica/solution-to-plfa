@@ -10,25 +10,21 @@ open Eq.≡-Reasoning using (begin_; _≡⟨⟩_; step-≡; _∎)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_; _∸_)
 ```
 
----
 
 Exercise `operators`
 
 1. ∧ and ∨ over `true` and `false`. They are associative, commutative, and distributive over the other.
 
 1. Matrix multiplication. It is not commutative, but does have an identity.
----
 
 ## Proof by induction
 
----
 
 Exercise `finite-∣-assoc`
 
 ```agda
 -- omitted
 ```
----
 
 ## Building proofs interactively
 
