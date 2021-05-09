@@ -181,3 +181,77 @@ lemma m n rewrite *-comm m (suc n) = refl
 ^-*-assoc m n zero rewrite *-rzero n = refl
 ^-*-assoc m n (suc p) rewrite ^-*-assoc m n p | lemma n p | ^-distrib-l-|-* m n (p * n) | *-comm n p = refl
 ```
+
+---
+
+Exercise `Bin-Law`
+
+```agda
+data Bin : Set where
+  ⟨⟩ : Bin
+  _O : Bin → Bin
+  _I : Bin → Bin
+
+inc : Bin → Bin
+inc ⟨⟩ = ⟨⟩ I
+inc (b O) = b I
+inc (b I) = (inc b) O
+
+to : ℕ → Bin
+to zero = ⟨⟩ O
+to (suc x) = inc (to x)
+
+from : Bin → ℕ
+from ⟨⟩ = 0
+from (b O) = 2 * from b
+from (b I) = 1 + 2 * from b
+
+```
+
+We have:
+```agda
+law1 : ∀ (b : Bin) → from (inc b) ≡ suc (from b)
+law1 ⟨⟩ = refl
+law1 (b O) = 
+    begin 
+        from (inc (b O))
+    ≡⟨⟩
+        from ( b I )
+    ≡⟨⟩
+        1 + ( 2 * from b )
+    ≡⟨⟩
+        suc (2 * from b)
+    ≡⟨⟩
+        suc (from (b O))
+    ∎
+law1 (b I) rewrite law1 b = 
+    begin 
+        2 * (1 + from b)
+    ≡⟨ *-comm 2 (1 + from b)⟩
+        (1 + from b) * 2
+    ≡⟨ *-distrib-+ 1 (from b) 2 ⟩
+        2 + from b * 2
+    ≡⟨ cong (_+_ 2) (*-comm (from b) 2) ⟩
+        2 + 2 * from b
+    ≡⟨⟩
+        1 + 1 + 2 * from b
+    ≡⟨⟩
+        suc (1 + 2 * from b)
+    ≡⟨⟩
+        suc (from (b I))
+    ∎
+
+```
+However, we don't have `to (from b) ≡ b` because of the leading `O`.
+```agda
+_ : to (from (⟨⟩ O I)) ≡ ⟨⟩ I
+_ = refl
+```
+
+But `from (to n) ≡ n` holds:
+
+```agda
+law3 : ∀ (n : ℕ) → from (to n) ≡ n
+law3 zero = refl
+law3 (suc n) rewrite law1 (to n) | law3 n = refl
+```
