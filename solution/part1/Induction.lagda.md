@@ -106,3 +106,78 @@ Exercise `*-comm`
                              = refl
 ```
 
+---
+
+Exercise `0∸n≡0`
+
+```agda
+zero-monus-n : ∀ (n : ℕ) →  0 ∸ n ≡ 0
+zero-monus-n zero = refl
+zero-monus-n (suc n) rewrite zero-monus-n n = refl
+```
+
+---
+
+Exercise `∸-|-assoc`
+
+```agda
+monus-|-assoc : ∀ (m n p : ℕ) → m ∸ n ∸ p ≡ m ∸ (n + p)
+monus-|-assoc zero n p rewrite zero-monus-n n | zero-monus-n (n + p) | zero-monus-n p = refl
+monus-|-assoc (suc m) zero p rewrite +-suc 0 p = refl
+monus-|-assoc (suc m) (suc n) p rewrite +-suc n p | monus-|-assoc m n p = refl
+```
+
+---
+
+Exercise `+*^`
+
+Import `_^_` frist.
+
+```agda
+open import Data.Nat using (_^_)
+```
+
+And we prove a lemma for future use:
+
+```agda
+*-swap : ∀ (k m n p : ℕ) → k * m * (n * p) ≡ k * n * (m * p)
+*-swap k m n p rewrite *-assoc k m (n * p) 
+                     | *-assoc k n (m * p) 
+                     | sym (*-assoc m n p)
+                     | *-comm m n
+                     | *-assoc n m p
+                     = refl
+```
+
+This exercise includes three parts:
+
+```agda
+^-distrib-l-|-* : ∀ (m n p : ℕ) → m ^ (n + p) ≡ (m ^ n) * (m ^ p)
+^-distrib-l-|-* m n zero rewrite +-identity^r n | *-comm (m ^ n) 1 | +-identity^r (m ^ n)  = refl
+^-distrib-l-|-* m zero (suc p) rewrite +-identity^r (m * (m ^ p)) = refl
+^-distrib-l-|-* m (suc n) (suc p) rewrite +-suc n p 
+                                         | ^-distrib-l-|-* m n p  
+                                         | sym (*-assoc m (m ^ n) (m ^ p))
+                                         | *-assoc m (m ^ n) (m * (m ^ p))
+                                         | *-comm m (m ^ n)
+                                         | sym (*-assoc (m ^ n) m (m ^ p))
+                                         = refl
+```
+
+and
+
+```agda
+^-distrib-r-* : ∀ (m n p : ℕ) → (m * n) ^ p ≡ (m ^ p) * (n ^ p)
+^-distrib-r-* m n zero = refl
+^-distrib-r-* m n (suc p) rewrite ^-distrib-r-* m n p | *-swap m n (m ^ p) (n ^ p) = refl
+```
+, and 
+
+```agda
+lemma : ∀ (m n : ℕ) → m * suc n ≡ m + n * m
+lemma m n rewrite *-comm m (suc n) = refl
+
+^-*-assoc : ∀ (m n p : ℕ) → (m ^ n) ^ p ≡ m ^ (n * p)
+^-*-assoc m n zero rewrite *-rzero n = refl
+^-*-assoc m n (suc p) rewrite ^-*-assoc m n p | lemma n p | ^-distrib-l-|-* m n (p * n) | *-comm n p = refl
+```
