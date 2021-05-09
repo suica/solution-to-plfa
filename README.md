@@ -26,8 +26,8 @@ The `template` branch contains a bare solution scaffold. You could fork this rep
 
 ### Part 1: Logical Foundations
 
-- [x] [Naturals](https://plfa.github.io/Naturals/)([solution](./src/part1/naturals.lagda.md)): Natural numbers
-- [ ] [Induction](https://plfa.github.io/Induction/): Proof by Induction
+- [x] [Naturals](https://plfa.github.io/Naturals/)([solution](./src/part1/Naturals.lagda.md)): Natural numbers
+- [x] [Induction](https://plfa.github.io/Induction/)([solution](./src/part1/Induction.lagda.md)): Proof by Induction
 - [ ] [Relations](https://plfa.github.io/Relations/): Inductive definition of relations
 - [ ] [Equality](https://plfa.github.io/Equality/): Equality and equational reasoning
 - [ ] [Isomorphism](https://plfa.github.io/Isomorphism/): Isomorphism and Embedding
