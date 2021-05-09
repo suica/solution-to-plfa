@@ -74,3 +74,35 @@ Exercise `*-distrib-+`
                               | +-assoc (m * p) p (n * p)
                               = refl
 ```
+
+---
+
+Exercise `*-assoc`
+
+```agda
+*-assoc : ∀ (m n p : ℕ) → (m * n) * p ≡ m * (n * p)
+*-assoc zero n p = refl
+*-assoc (suc m) n p rewrite *-distrib-+ n (m * n) p | *-assoc m n p = refl
+```
+
+---
+
+Exercise `*-comm`
+
+```agda
+*-rzero : ∀ (m : ℕ) → m * 0 ≡ 0
+*-rzero zero = refl
+*-rzero (suc m) rewrite *-rzero m = refl
+
+*-comm : ∀ (m n : ℕ) → m * n ≡ n * m
+*-comm m zero rewrite *-rzero m = refl
+*-comm zero (suc n) rewrite *-rzero (suc n) = refl
+*-comm (suc m) (suc n) rewrite *-comm n (suc m) 
+                             | *-comm m (suc n) 
+                             | *-comm n m 
+                             | sym (+-assoc n m (m * n)) 
+                             | sym (+-assoc m n (m * n)) 
+                             | +-comm n m 
+                             = refl
+```
+
