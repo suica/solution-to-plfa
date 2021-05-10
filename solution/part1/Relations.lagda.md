@@ -129,3 +129,5 @@ open import Data.Nat.Properties using (*-comm)
     → (m * p) ≤ (n * q)
 *-mono-≤ m n p q m≤n p≤q = ≤-trans (*-monoˡ-≤ m n p m≤n) (*-monoʳ-≤ n p q p≤q)
 ```
+
+Notice that it will be some unnecessary boring steps if you to define `*-monoˡ-≤` before `*-monoʳ-≤`.
