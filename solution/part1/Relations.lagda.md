@@ -59,3 +59,73 @@ Example code:
 Exercise `≤-antisym-cases`
 
 Because there are unnecessary cases involving the equation `suc n = zero`, which has no solution, hence omitted.
+
+```agda
+
+data Total (m n : ℕ) : Set where
+
+  forward :
+      m ≤ n
+      ---------
+    → Total m n
+
+  flipped :
+      n ≤ m
+      ---------
+    → Total m n
+
+≤-total : ∀ (m n : ℕ) → Total m n
+≤-total zero    n                         =  forward z≤n
+≤-total (suc m) zero                      =  flipped z≤n
+≤-total (suc m) (suc n) with ≤-total m n
+...                        | forward m≤n  =  forward (s≤s m≤n)
+...                        | flipped n≤m  =  flipped (s≤s n≤m)
+```
+
+Exercise `*-mono-≤`
+
+We import `*` and it properties first:
+```agda
+open import Data.Nat using (_*_)
+open import Data.Nat.Properties using (*-comm)
+```
+
+```agda
++-monoʳ-≤ : ∀ (n p q : ℕ)
+  → p ≤ q
+    -------------
+  → (n + p) ≤ (n + q)
++-monoʳ-≤ zero    p q p≤q  =  p≤q
++-monoʳ-≤ (suc n) p q p≤q  =  s≤s (+-monoʳ-≤ n p q p≤q)
+
++-monoˡ-≤ : ∀ (m n p : ℕ)
+  → m ≤ n
+    -------------
+  → (m + p) ≤ (n + p)
++-monoˡ-≤ m n p m≤n  rewrite +-comm m p | +-comm n p  = +-monoʳ-≤ p m n m≤n
+
++-mono-≤ : ∀ (m n p q : ℕ)
+  → m ≤ n
+  → p ≤ q
+    -------------
+  → (m + p) ≤ (n + q)
++-mono-≤ m n p q m≤n p≤q  =  ≤-trans (+-monoˡ-≤ m n p m≤n) (+-monoʳ-≤ n p q p≤q)
+
+*-monoʳ-≤ : ∀ (n p q : ℕ) 
+    → p ≤ q 
+    → (n * p) ≤ (n * q)
+*-monoʳ-≤ zero p q p≤q = z≤n
+*-monoʳ-≤ (suc n) p q p≤q = ≤-trans (+-monoˡ-≤ p q (n * p) p≤q) (+-mono-≤ q q (n * p) (n * q) ≤-refl (*-monoʳ-≤ n p q p≤q))
+
+*-monoˡ-≤ : ∀ (p q n : ℕ) 
+    → p ≤ q 
+    → (p * n) ≤ (q * n)
+*-monoˡ-≤ p q zero p≤q rewrite *-comm p 0 = z≤n
+*-monoˡ-≤ p q (suc n) p≤q rewrite *-comm p (suc n) | *-comm q (suc n) = *-monoʳ-≤ (suc n) p q p≤q
+
+*-mono-≤ : ∀ (m n p q : ℕ) 
+    → m ≤ n 
+    → p ≤ q 
+    → (m * p) ≤ (n * q)
+*-mono-≤ m n p q m≤n p≤q = ≤-trans (*-monoˡ-≤ m n p m≤n) (*-monoʳ-≤ n p q p≤q)
+```
