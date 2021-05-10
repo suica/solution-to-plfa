@@ -20,6 +20,7 @@ data _≤_ : ℕ → ℕ → Set where
     → m ≤ n
     → suc m ≤ suc n
 
+infix 4 _≤_
 ```
 
 Exercise `orderings`
