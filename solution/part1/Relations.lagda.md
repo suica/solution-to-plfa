@@ -132,3 +132,35 @@ open import Data.Nat.Properties using (*-comm)
 ```
 
 Notice that it will be some unnecessary boring steps if you to define `*-monoˡ-≤` before `*-monoʳ-≤`.
+
+## Strict inequality
+
+```agda
+infix 4 _<_
+
+data _<_ : ℕ → ℕ → Set where
+
+  z<s : ∀ {n : ℕ}
+      ------------
+    → zero < suc n
+
+  s<s : ∀ {m n : ℕ}
+    → m < n
+      -------------
+    → suc m < suc n
+```
+
+---
+
+Exercise `<-trans`
+
+```agda
+<-inv-s<s : ∀ {m n : ℕ}
+  → suc m < suc n 
+  → m < n
+<-inv-s<s (s<s x) = x
+
+<-trans : ∀ (m n p : ℕ) → m < n → n < p → m < p
+<-trans zero (suc n) (suc p) m<n n<p = z<s
+<-trans (suc m) (suc n) (suc p) sm<sn sn<sp = s<s (<-trans m n p (<-inv-s<s sm<sn) (<-inv-s<s sn<sp))
+```
