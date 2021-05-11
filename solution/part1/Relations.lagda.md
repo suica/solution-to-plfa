@@ -261,3 +261,133 @@ Exercise `<-trans-revisited`
 <-trans-revisited {zero} {suc n} {suc p} x x₁ = z<s
 <-trans-revisited {suc m} {suc n} {suc p} (s<s x) (s<s x₁) = ≤-to-< (≤-trans (s≤s (<-to-≤ x)) (s≤s (<-to-≤' x₁))) 
 ```
+
+## Even and odd
+
+Example code:
+```agda
+data even : ℕ → Set
+data odd  : ℕ → Set
+
+data even where
+
+  zero :
+      ---------
+      even zero
+
+  suc  : ∀ {n : ℕ}
+    → odd n
+      ------------
+    → even (suc n)
+
+data odd where
+
+  suc  : ∀ {n : ℕ}
+    → even n
+      -----------
+    → odd (suc n)
+
+e+e≡e : ∀ {m n : ℕ}
+  → even m
+  → even n
+    ------------
+  → even (m + n)
+
+o+e≡o : ∀ {m n : ℕ}
+  → odd m
+  → even n
+    -----------
+  → odd (m + n)
+
+e+e≡e zero     en  =  en
+e+e≡e (suc om) en  =  suc (o+e≡o om en)
+
+o+e≡o (suc em) en  =  suc (e+e≡e em en)
+```
+
+---
+
+Exercise `o+o≡e`
+
+```agda
+o+o≡e : ∀ {m n : ℕ}
+  → odd m
+  → odd n
+  → even (m + n)
+
+o+o≡e {suc m} {suc n} (suc x) (suc x₁) rewrite +-comm m (suc n) = suc (o+e≡o (suc x₁) x)
+```
+
+---
+
+Exercise `Bin-predicates`
+
+We copy the definitions related to `Bin` from section *Induction* first.
+
+```agda
+data Bin : Set where
+  ⟨⟩ : Bin
+  _O : Bin → Bin
+  _I : Bin → Bin
+
+inc : Bin → Bin
+inc ⟨⟩ = ⟨⟩ I
+inc (b O) = b I
+inc (b I) = (inc b) O
+
+to : ℕ → Bin
+to zero = ⟨⟩ O
+to (suc x) = inc (to x)
+
+from : Bin → ℕ
+from ⟨⟩ = 0
+from (b O) = 2 * from b
+from (b I) = 1 + 2 * from b
+```
+
+Second, we define the auxiliary predicate `One`.
+
+```agda
+data One : Bin → Set where
+  one :
+      -------
+      One (⟨⟩ I)
+  next : ∀ {b : Bin}
+    → One b
+      ---------
+    → One (inc b)
+
+data Can : Bin → Set where
+  one :
+      ∀ {b : Bin}
+      -----------
+    → One b
+    → Can b
+  zero :
+      Can (⟨⟩ O)
+
+can-inc : ∀ {b : Bin} 
+            → Can b 
+              -----------
+            → Can (inc b)
+can-inc (one x) = one (next x)
+can-inc zero = one one
+
+can-to-n : ∀ {n : ℕ} 
+              ----------
+            → Can (to n)
+can-to-n {zero} = zero
+can-to-n {suc n} = can-inc (can-to-n {n})
+
+can-to-from-id : ∀ {b : Bin} 
+                   → Can b 
+                   ---------
+                   → to (from b) ≡ b
+
+can-to-from-id {b} x = {!   !}
+
+helper : ∀ {b : Bin} → One b → 1 ≤ from b
+helper one = s≤s z≤n
+helper (next x) = {! ? !}
+
+```
