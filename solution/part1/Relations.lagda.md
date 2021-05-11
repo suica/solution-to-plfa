@@ -200,3 +200,31 @@ data Trichotomy (m n : ℕ) : Set where
 ...                          | tri-m>n (m>n x) = tri-m>n (m>n (s<s x))
 ...                          | tri-m≡n m≡n  = tri-m≡n (cong suc m≡n)
 ```
+
+---
+
+Exercise `+-mono-<`
+
+```agda
++-monoʳ-< : ∀ ( p m n : ℕ)
+  → m < n
+  → p + m < p + n
++-monoʳ-< zero m n x = x
++-monoʳ-< (suc p) zero (suc n) z<s = s<s (+-monoʳ-< p 0 (suc n) z<s)
++-monoʳ-< (suc p) (suc m) (suc n) (s<s x) rewrite +-comm p (suc m) 
+                                          | +-comm p (suc n) 
+                                          | +-comm m p 
+                                          | +-comm n p 
+                                          = s<s (s<s (+-monoʳ-< p m n x))
+
++-monoˡ-< : ∀ (m n p : ℕ) 
+  → m < n
+  → m + p < n + p
++-monoˡ-< m n p x rewrite +-comm m p | +-comm n p = +-monoʳ-< p m n x
+
++-mono-< : ∀ {m n p q : ℕ}
+  → m < n
+  → p < q
+  → m + p < n + q
++-mono-< {m} {n} {p} {q} x x₁ = <-trans (m + p) (m + q) (n + q) (+-monoʳ-< m p q x₁) (+-monoˡ-< m n q x)
+```
