@@ -155,12 +155,7 @@ data _<_ : ℕ → ℕ → Set where
 Exercise `<-trans`
 
 ```agda
-<-inv-s<s : ∀ {m n : ℕ}
-  → suc m < suc n 
-  → m < n
-<-inv-s<s (s<s x) = x
-
 <-trans : ∀ (m n p : ℕ) → m < n → n < p → m < p
-<-trans zero (suc n) (suc p) m<n n<p = z<s
-<-trans (suc m) (suc n) (suc p) sm<sn sn<sp = s<s (<-trans m n p (<-inv-s<s sm<sn) (<-inv-s<s sn<sp))
+<-trans 0 (suc _) (suc p) z<s x' = z<s
+<-trans (suc m) (suc n) (suc p) (s<s x) (s<s x') = s<s (<-trans m n p x x')
 ```
