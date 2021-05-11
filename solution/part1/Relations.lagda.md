@@ -228,3 +228,36 @@ Exercise `+-mono-<`
   → m + p < n + q
 +-mono-< {m} {n} {p} {q} x x₁ = <-trans (m + p) (m + q) (n + q) (+-monoʳ-< m p q x₁) (+-monoˡ-< m n q x)
 ```
+
+---
+
+Exercise `≤-iff-<`
+
+```agda
+≤-to-< : ∀ {m n : ℕ} → suc m ≤ n → m < n
+≤-to-< {zero} {suc n} x = z<s
+≤-to-< {suc m} {suc n} (s≤s x) = s<s (≤-to-< x)
+
+<-to-≤ : ∀ {m n : ℕ} → m < n → suc m ≤ n 
+<-to-≤ {zero} {suc n} z<s = s≤s z≤n
+<-to-≤ {suc m} {suc n} (s<s x) = s≤s (<-to-≤ x)
+```
+
+---
+
+Exercise `<-trans-revisited`
+
+```agda
+<-to-≤' : ∀ { m n : ℕ } 
+  → m < n
+  → m ≤ n
+<-to-≤' {zero} {n} x = z≤n
+<-to-≤' {suc m} {suc n} (s<s x) = s≤s (<-to-≤' x)
+
+<-trans-revisited : ∀ {m n p : ℕ} 
+  → m < n
+  → n < p
+  → m < p
+<-trans-revisited {zero} {suc n} {suc p} x x₁ = z<s
+<-trans-revisited {suc m} {suc n} {suc p} (s<s x) (s<s x₁) = ≤-to-< (≤-trans (s≤s (<-to-≤ x)) (s≤s (<-to-≤' x₁))) 
+```
