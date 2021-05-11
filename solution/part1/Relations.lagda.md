@@ -159,3 +159,44 @@ Exercise `<-trans`
 <-trans 0 (suc _) (suc p) z<s x' = z<s
 <-trans (suc m) (suc n) (suc p) (s<s x) (s<s x') = s<s (<-trans m n p x x')
 ```
+
+---
+
+Exercise `trichotomy`
+
+Let we define > first.
+```agda
+data _>_ (m n : ℕ) : Set where
+    m>n :
+        n < m
+      → m > n
+
+infix 4 _>_
+```
+And we define a datatype named `Trichotomy`, resembling to `Total`
+```agda
+
+data Trichotomy (m n : ℕ) : Set where
+
+  tri-m<n :
+      m < n
+      --------------
+    → Trichotomy m n
+
+  tri-m>n :
+      m > n
+    → Trichotomy m n
+
+  tri-m≡n :
+      m ≡ n
+    → Trichotomy m n
+
+<-trichotomy : ∀ {m n : ℕ} → Trichotomy m n
+<-trichotomy {zero} {zero} = tri-m≡n refl
+<-trichotomy {zero} {suc n} = tri-m<n z<s
+<-trichotomy {suc m} {zero} = tri-m>n (m>n z<s)
+<-trichotomy {suc m} {suc n} with <-trichotomy {m} {n}
+...                          | tri-m<n m<n  = tri-m<n (s<s m<n)
+...                          | tri-m>n (m>n x) = tri-m>n (m>n (s<s x))
+...                          | tri-m≡n m≡n  = tri-m≡n (cong suc m≡n)
+```
