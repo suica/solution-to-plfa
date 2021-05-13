@@ -12,11 +12,27 @@ The `template` branch contains a bare solution scaffold. You could fork this rep
 
 #### Install Haskell
 
-[WIP]
+We recommend to use ghcup to install Haskell and the package manager `cabal`.
+
+Just follow the instructions on [ghcup](https://www.haskell.org/ghcup/).
+
+After the installation, you may be able to call `cabal` from your terminal. If you are not, consider adding following statements to your shell config file ( e.g., `~/.bashrc`, `~/.zshrc`).
+
+```
+export PATH=$HOME/.ghcup/bin:$PATH
+export PATH=$HOME/.cabal/bin:$PATH
+```
+
+Note that it is for mac users. If you are installing Haskell on a Windows / Linux, you should modify your environment variables accordingly.
 
 #### Install Agda
 
-[WIP]
+```
+cabal v2-install --lib ieee754
+cabal v2-install Agda
+```
+
+After a long period of compilation, you can call `agda` in your terminal.
 
 #### Tunning your editor
 
