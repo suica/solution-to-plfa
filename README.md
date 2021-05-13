@@ -28,8 +28,8 @@ The `template` branch contains a bare solution scaffold. You could fork this rep
 
 - [x] [Naturals](https://plfa.github.io/Naturals/)([solution](./solution/part1/Naturals.lagda.md)): Natural numbers
 - [x] [Induction](https://plfa.github.io/Induction/)([solution](./solution/part1/Induction.lagda.md)): Proof by Induction
-- [ ] [Relations](https://plfa.github.io/Relations/): Inductive definition of relations
-- [ ] [Equality](https://plfa.github.io/Equality/): Equality and equational reasoning
+- [ ] [Relations](https://plfa.github.io/Relations/)([solution](./solution/part1/Relations.lagda.md)): Inductive definition of relations
+- [x] [Equality](https://plfa.github.io/Equality/)([solution](./solution/part1/Equality.lagda.md)): Equality and equational reasoning
 - [ ] [Isomorphism](https://plfa.github.io/Isomorphism/): Isomorphism and Embedding
 - [ ] [Connectives](https://plfa.github.io/Connectives/): Conjunction, disjunction, and implication
 - [ ] [Negation](https://plfa.github.io/Negation/): Negation, with intuitionistic and classical logic
