@@ -47,7 +47,7 @@ After a long period of compilation, you can call `agda` in your terminal.
 - [ ] [Relations](https://plfa.github.io/Relations/)([solution](./solution/part1/Relations.lagda.md)): Inductive definition of relations
 - [x] [Equality](https://plfa.github.io/Equality/)([solution](./solution/part1/Equality.lagda.md)): Equality and equational reasoning
 - [x] [Isomorphism](https://plfa.github.io/Isomorphism/)([solution](./solution/part1/Isomorphism.lagda.md)): Isomorphism and Embedding
-- [ ] [Connectives](https://plfa.github.io/Connectives/): Conjunction, disjunction, and implication
+- [x] [Connectives](https://plfa.github.io/Connectives/)([solution](./solution/part1/Connectives.lagda.md)): Conjunction, disjunction, and implication
 - [ ] [Negation](https://plfa.github.io/Negation/): Negation, with intuitionistic and classical logic
 - [ ] [Quantifiers](https://plfa.github.io/Quantifiers/): Universals and existentials
 - [ ] [Decidable](https://plfa.github.io/Decidable/): Booleans and decision procedures
