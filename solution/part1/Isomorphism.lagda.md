@@ -210,8 +210,12 @@ record _⇔_ (A B : Set) : Set where
     field
         to   : A → B
         from : B → A
-⇔-refl : ∀ {A B : Set} → A ⇔ B → B ⇔ A
-⇔-refl = λ x → record { to = _⇔_.from x ; from = _⇔_.to x }
+
+⇔-refl : ∀ {A B : Set} → A ⇔ B → A ⇔ B
+⇔-refl = λ x → record { to = _⇔_.to x ; from = _⇔_.from x }
+
+⇔-sym : ∀ {A B : Set} → A ⇔ B → B ⇔ A
+⇔-sym = λ x → record { to = _⇔_.from x ; from = _⇔_.to x }
 
 ⇔-trans : ∀ {A B C : Set} → A ⇔ B → B ⇔ C → A ⇔ C
 ⇔-trans = λ x x₁ → record { to = λ z → _⇔_.to x₁ (_⇔_.to x z) ; from = λ z → _⇔_.from x (_⇔_.from x₁ z) }
